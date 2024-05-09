@@ -1,4 +1,7 @@
+import { inject } from '@angular/core';
 import { Routes } from '@angular/router';
+import { AuthService } from '@services/auth.service';
+import { adminGuard } from './guards/admin.guard';
 
 export const routes: Routes = [
     {
@@ -48,9 +51,15 @@ export const routes: Routes = [
     {
         path : 'admin', 
         loadComponent : () => import('./layouts/admin-layout/admin-layout.component').then(res => res.AdminLayoutComponent),
+        canActivate: [adminGuard],
         children: [
-            
+            { path: '', loadComponent: () => import('@pages/admin/dashboard/dashboard.component').then(res => res.DashboardComponent) },
+            { path: 'posts', loadComponent: () => import('@pages/admin/posts/posts.component').then(res => res.PostsComponent) }
         ]
+    },
+    {
+        path: 'contact',
+        loadComponent: () => import('./pages/contact/contact.component').then(res => res.ContactComponent)
     },
     {
         path: 'unauthorized',

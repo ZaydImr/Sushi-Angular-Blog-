@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'

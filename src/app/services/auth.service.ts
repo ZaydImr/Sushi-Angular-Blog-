@@ -1,7 +1,8 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { UserCredential, getAuth, signInWithEmailAndPassword, sendPasswordResetEmail, signInWithPopup, signOut, GoogleAuthProvider, FacebookAuthProvider } from '@angular/fire/auth';
 import { User, onAuthStateChanged } from '@firebase/auth';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { HelperService } from './helper.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,10 @@ export class AuthService {
     onAuthStateChanged(getAuth(), (user: User | null) => {
       this.isLoggedInSubject.next(!!user);
     });
+  }
+
+  get isAuthenticated() : Observable<boolean> {
+    return this.authenticated;
   }
 
   login(email: string, password: string): Promise<UserCredential> {

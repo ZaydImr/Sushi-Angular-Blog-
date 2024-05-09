@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { AdminSidebarComponent } from '../components/admin-sidebar/admin-sidebar.component';
+import { AuthService } from '@services/auth.service';
 
 @Component({
   selector: 'app-admin-layout',
@@ -11,4 +12,13 @@ import { AdminSidebarComponent } from '../components/admin-sidebar/admin-sidebar
 })
 export class AdminLayoutComponent {
 
+  constructor(private authSrv: AuthService, private router: Router){}
+
+  async ngOnInit(): Promise<void> {
+    this.authSrv.authenticated.subscribe((loggedIn) => {      
+      // if (!loggedIn) {
+      //     this.router.navigate(['/login']);
+      // }
+    });
+  }
 }

@@ -22,8 +22,4 @@ export class GlobalComponent implements OnInit {
     });
   }
 
-  logout(): void {
-    this.authSrv.logout().then();
-  }
-
 }

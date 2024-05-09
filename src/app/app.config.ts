@@ -8,6 +8,7 @@ import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getAnalytics, provideAnalytics, ScreenTrackingService, UserTrackingService } from '@angular/fire/analytics';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { environment } from '../environments/environment.development';
+import { provideHttpClient } from '@angular/common/http';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -20,5 +21,7 @@ export const appConfig: ApplicationConfig = {
     importProvidersFrom(provideAnalytics(() => getAnalytics())),
     ScreenTrackingService,
     UserTrackingService,
-    importProvidersFrom(provideFirestore(() => getFirestore()))]
+    importProvidersFrom(provideFirestore(() => getFirestore())),
+    provideHttpClient(),
+  ]
 };
